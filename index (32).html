@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Privt Enter Work</title>
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 40px;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+  }
+  h1 { text-align: center; color: #ffdd57; }
+  p { text-align: center; opacity: 0.8; }
+  .file-list {
+    margin: 30px auto;
+    max-width: 600px;
+    background: rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 12px;
+  }
+  .file-list a {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    color: #ffdd57;
+    text-decoration: none;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+    transition: 0.3s;
+  }
+  .file-list a:hover { background: rgba(255,255,255,0.2); }
+</style>
+</head>
+<body>
+<h1>Privt Enter Work</h1>
+<p>Press <b>Shift + O</b> to open the secret upload window (Admin only)</p>
+
+<div class="file-list" id="fileList">
+  <h2>📂 Shared Files</h2>
+  <p>No files yet. Upload via admin page.</p>
+</div>
+
+<script>
+  // Secret key: Shift + O opens upload page
+  document.addEventListener("keydown", function(e) {
+    if(e.shiftKey && e.key === "O") {
+      window.open("upload.html", "UploadWindow", "width=600,height=400");
+    }
+  });
+
+  // Load uploaded files from localStorage
+  function loadFiles() {
+    let fileList = document.getElementById("fileList");
+    let files = JSON.parse(localStorage.getItem("uploadedFiles")) || [];
+    if(files.length > 0) {
+      fileList.innerHTML = "<h2>📂 Shared Files</h2>";
+      files.forEach(file => {
+        let link = document.createElement("a");
+        link.href = file.data;
+        link.target = "_blank";
+        link.textContent = file.name;
+        fileList.appendChild(link);
+      });
+    }
+  }
+
+  loadFiles();
+</script>
+</body>
+</html>
