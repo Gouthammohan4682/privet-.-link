@@ -43,14 +43,14 @@
 </div>
 
 <script>
-  // Secret key: Shift + O opens upload page
+  
   document.addEventListener("keydown", function(e) {
     if(e.shiftKey && e.key === "O") {
       window.open("upload.html", "UploadWindow", "width=600,height=400");
     }
   });
 
-  // Load uploaded files from localStorage
+  
   function loadFiles() {
     let fileList = document.getElementById("fileList");
     let files = JSON.parse(localStorage.getItem("uploadedFiles")) || [];
